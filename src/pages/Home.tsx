@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native'
+import React, { useMemo, useState } from 'react';
+import { View, StyleSheet, Appearance } from 'react-native'
 
 import { Header } from '../components/Header';
 import { MyTasksList } from '../components/MyTasksList';
@@ -13,6 +13,10 @@ interface Task {
 
 export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  
+  const isDarkTheme = useMemo(() => {
+    return Appearance.getColorScheme() === 'dark'
+  }, [])
 
   function handleAddTask(newTaskTitle: string) {
     if (newTaskTitle) {
@@ -47,7 +51,10 @@ export function Home() {
   }
 
   return (
-    <View style={styles.body}>
+    <View style={[
+      styles.body,
+      isDarkTheme && styles.bodyDark
+    ]}>
       <Header />
 
       <TodoInput addTask={handleAddTask} />
@@ -65,5 +72,8 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: '#fff'
+  },
+  bodyDark: {
+    backgroundColor: '#10101E'
   }
 })

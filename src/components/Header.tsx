@@ -1,11 +1,25 @@
-import React from 'react';
-import { View, Text, StatusBar, StyleSheet } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, StatusBar, StyleSheet, Appearance } from 'react-native';
 
 export function Header() {
+  const isDarkTheme = useMemo(() => {
+    return Appearance.getColorScheme() === 'dark'
+  }, [])
+
   return (
-    <View style={styles.header}>
-      <Text style={styles.headerText}>to.</Text>
-      <Text style={[styles.headerText, { fontFamily: 'Poppins-SemiBold' }]}>do</Text>
+    <View style={[
+      styles.header,
+      isDarkTheme && styles.headerDark
+    ]}>
+      <Text style={[
+        styles.headerText,
+        isDarkTheme && styles.headerTextDark
+      ]}>to.</Text>
+      <Text style={[
+        styles.headerText,
+        { fontFamily: 'Poppins-SemiBold' },
+        isDarkTheme && styles.headerTextDark
+      ]}>do</Text>
     </View>
   )
 }
@@ -19,9 +33,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row'
   },
+  headerDark: {
+    backgroundColor: '#191932'
+  },
   headerText: {
     fontSize: 24,
     color: '#FFF',
     fontFamily: 'Poppins-Regular',
+  },
+  headerTextDark: {
+    color: '#E1E1E6'
   }
 });

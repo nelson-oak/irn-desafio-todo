@@ -1,6 +1,7 @@
-# Projeto MySkills
+# Desafio Principal 1 e Complementar 1A
 
 Aplicação desenvolvida no bootcamp ignite - trilha react native
+Aplicação de TODO List, para treinar os fundamentos do React Native
 
 ## Funcionalidades
 
